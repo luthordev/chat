@@ -1,11 +1,13 @@
 <template>
-  <div class="chat-input">
+  <div class="chat-input d-flex justify-content-end">
     <input
       type="text"
       placeholder="Type your message..."
       v-model="props.value"
     />
-    <button>Send</button>
+    <button class="me-2">
+      <font-awesome-icon icon="paper-plane" size="xl" />
+    </button>
   </div>
 </template>
 

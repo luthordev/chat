@@ -3,10 +3,10 @@
     class="chat d-flex justify-content-center align-items-center px-3"
     :class="{ active: active }"
   >
-    <div class="col-3">
+    <div class="col-lg-3">
       <img :src="props.avatar" class="avatar" />
     </div>
-    <div class="col-9 d-flex flex-column">
+    <div class="col-lg-9 d-flex flex-column">
       <div class="d-flex justify-content-between mb-1">
         <span class="h6 mb-0">{{ props.name }}</span>
         <span class="time-last-message">

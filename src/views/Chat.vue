@@ -1,12 +1,12 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-3 d-flex flex-column sidebar">
+      <div class="col-lg-3 col-sm-12 d-flex flex-column sidebar">
         <ProfileCard name="Luthfi Athorique" />
         <div class="d-flex justify-content-between mb-2">
           <span> Last Chats </span>
           <button class="btn-add-chat">
-            <Icon name="plus" width="16px" height="16px" />
+            <font-awesome-icon icon="plus" />
           </button>
         </div>
         <div class="list-chat py-2 pe-2">
@@ -60,7 +60,7 @@
           />
         </div>
       </div>
-      <div class="col-9 chat-room-wrapper py-3">
+      <div class="col-lg-9 col-sm-12 chat-room-wrapper">
         <ChatRoom>
           <HeaderChat
             name="Freya"
@@ -84,7 +84,6 @@
 import { ref, onMounted, watch } from "vue";
 import Chat from "@/components/Chat.vue";
 import ProfileCard from "@/components/ProfileCard.vue";
-import Icon from "@/components/Icon.vue";
 import ChatRoom from "@/components/ChatRoom/Index.vue";
 import HeaderChat from "@/components/ChatRoom/Header.vue";
 import ContentChat from "@/components/ChatRoom/Content.vue";
@@ -102,6 +101,5 @@ function scrollToBottom() {
 
 onMounted(() => {
   //   scrollToBottom();
-  console.log(chatContent.scrollHeight);
 });
 </script>
