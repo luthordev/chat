@@ -256,3 +256,37 @@ body {
 .chat-input button:hover {
   color: #8fe44e;
 }
+
+.login-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-content {
+  background-color: white !important;
+  width: auto !important;
+  height: 250px;
+  padding: 20px;
+  text-align: center;
+}
+
+.login-next {
+  border: none;
+  background-color: #f7f8fa;
+  margin-top: 20px;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.login-next:hover {
+  /* background-color: #d8d8d8; */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

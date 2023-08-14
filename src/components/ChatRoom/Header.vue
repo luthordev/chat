@@ -5,7 +5,7 @@
     </div>
     <div class="col-lg-10 col-sm-7 d-flex flex-column">
       <span class="h5 mb-0">{{ props.name }}</span>
-      <p v-if="props.status" class="mb-0">{{ props.status }}</p>
+      <p v-if="props.status" class="mb-0 text-secondary">{{ props.status }}</p>
     </div>
     <div
       class="col-lg-1 col-sm-2 d-flex justify-content-end align-items-center"

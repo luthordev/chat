@@ -1,8 +1,15 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
+    <div v-if="sessions" class="row">
       <div class="col-lg-3 col-sm-12 d-flex flex-column sidebar">
-        <ProfileCard name="Luthfi Athorique" />
+        <ProfileCard
+          :avatar="sessions != null ? sessions.picture : null"
+          :name="
+            sessions != null
+              ? `${sessions.given_name} ${sessions.family_name}`
+              : null
+          "
+        />
         <div class="d-flex justify-content-between mb-2">
           <span> Last Chats </span>
           <button class="btn-add-chat">
@@ -77,11 +84,24 @@
         </ChatRoom>
       </div>
     </div>
+
+    <div class="login-wrapper" v-else>
+      <div class="login-content d-flex flex-column justify-content-center">
+        <h2>Welcome to the Chat App!</h2>
+        <p>Please login first using your google account.</p>
+        <button class="login-next" @click="login">
+          <span class="me-2">Next</span>
+          <font-awesome-icon icon="arrow-right" />
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, watch } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
 import Chat from "@/components/Chat.vue";
 import ProfileCard from "@/components/ProfileCard.vue";
 import ChatRoom from "@/components/ChatRoom/Index.vue";
@@ -90,7 +110,18 @@ import ContentChat from "@/components/ChatRoom/Content.vue";
 import InputChat from "@/components/ChatRoom/Input.vue";
 import BubbleChat from "@/components/ChatRoom/Bubble.vue";
 
+const router = useRouter();
+
 const chatContent = ref(null);
+const sessions = ref(
+  localStorage.getItem("luthorchat-sessions") !== null
+    ? JSON.parse(localStorage.getItem("luthorchat-sessions"))
+    : null
+);
+
+function login() {
+  window.location.href = "http://localhost:3001/auth/login";
+}
 
 function scrollToBottom() {
   chatContent.value.scrollTo({
@@ -99,7 +130,26 @@ function scrollToBottom() {
   });
 }
 
+async function Verify(code) {
+  const response = await axios.get(
+    `http://localhost:3001/auth/getUserInfo?code=${code}`
+  );
+  localStorage.setItem(
+    "luthorchat-sessions",
+    JSON.stringify(response.data.payload)
+  );
+  router.push({ query: null });
+  setTimeout(() => {
+    router.go();
+  }, 200);
+}
+
 onMounted(() => {
-  //   scrollToBottom();
+  if (sessions.value == null) {
+    const parsedUrl = new URL(window.location.href);
+    const code = parsedUrl.searchParams.get("code");
+
+    if (code) Verify(code);
+  }
 });
 </script>
